@@ -1,0 +1,9 @@
+:root{
+
+    --color-primary: rgb(92,187,171);
+    --color-secondary: rgb(255, 255, 255);
+
+    --color-text-white: #ffffff;
+    --color-text-dark: #313131;
+    --color-text-green: #4c948c;
+}
