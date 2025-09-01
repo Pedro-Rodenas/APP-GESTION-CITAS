@@ -13,17 +13,9 @@
 <body>
     <main>
         <section class="modulo">
-            <div class="top">
-                <form class="form-search" action="" method="POST">
-                    <input class="control" type="search" name="buscar" id="" placeholder="Buscar...">
-                </form>
-                <div class="perfil">
-                    <img src="{{asset('images/medico.PNG')}}" alt="Medico">
-                </div>
-            </div>
+
             <section class="content">
                 <h1>Lista de Pacientes</h1>
-                <a class="btn btn-green" href="">Crear Paciente</a>
                 <table class="table">
                     <thead class="table-head">
                         <tr class="row-head">
@@ -55,8 +47,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="" class="btn btn-success">Nuevo Paciente</a>
-            </section>
+                <a href="/pacientes/formulario.blade.php" class="btn btn-success">Nuevo Paciente</a>
+                </section>
         </section>
     </main>
 </body>
