@@ -4,9 +4,11 @@
     box-sizing: border-box;
 }
 
+
 a{
     text-decoration: none;
     color: inherit;
+    display: block;
 }
 img{
     display: block;
@@ -52,4 +54,9 @@ html{
 }
 .bg-white{
     background: var(--color-secondary);
+}
+.btn-green{
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+    max-width: max-content;
 }
