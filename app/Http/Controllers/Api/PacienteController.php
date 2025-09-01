@@ -16,11 +16,22 @@ class PacienteController extends Controller
         return PacienteResource::collection(Paciente::all());
     }
 
-    public function store(StorePacienteRequest $request)
-    {
-        $paciente = Paciente::create($request->validated());
-        return new PacienteResource($paciente);
-    }
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'apellido' => 'required|string|max:255',
+        'fecha_nacimiento' => 'required|date',
+        'genero' => 'required|string',
+        'telefono' => 'required|string|max:15',
+        'direccion' => 'required|string|max:255',
+        'tipo_sangre' => 'required|string|max:3',
+    ]);
+
+    $paciente = Paciente::create($validated);
+
+    return redirect()->route('patients.formulario')->with('success', 'Paciente registrado correctamente ✅');
+}
 
     public function show(Paciente $paciente)
     {
