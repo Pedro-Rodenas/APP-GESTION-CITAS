@@ -16,10 +16,21 @@ class MedicoController extends Controller
         return MedicoResource::collection(Medico::all());
     }
 
-    public function store(StoreMedicoRequest $request)
+    public function store(Request $request)
     {
-        $medico = Medico::create($request->validated());
-        return new MedicoResource($medico);
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'especialidad' => 'required|string|max:100',
+            'telefono' => 'nullable|string|max:20',
+            'email' => 'required|email|max:150|unique:medicos,email',
+            'licencia' => 'required|string|max:50|unique:medicos,licencia',
+            'años_experiencia' => 'required|integer|min:0',
+        ]);
+
+        $medico = Medico::create($validated);
+
+        return redirect()->route('doctors.regstrar')->with('success', 'Doctor registrado correctamente');
     }
 
     public function show(Medico $medico)
