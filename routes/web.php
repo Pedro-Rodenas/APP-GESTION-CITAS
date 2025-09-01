@@ -28,3 +28,33 @@ Route::get('/patients', function () {
 })->name('patients.formulario');
 
 Route::post('/patients', [PacienteController::class, 'store'])->name('patients.store');
+/* RUTAS PARA PACIENTES */
+Route::get('/dashboard/pacientes', function() {
+    /* Simulamos traer los datos */
+    $pacientes = [
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ],
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ],
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ]
+        ];
+
+    return view('pacientes.index',compact('pacientes'));
+    
+})->name('pacientes');
