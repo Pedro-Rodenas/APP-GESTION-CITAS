@@ -22,3 +22,34 @@ Route::post('/login', function(Request $request) {
         return redirect()->route('login')->with('error', 'Usuario o contraseña incorrectos');
     }
 })->name('verificar');
+
+/* RUTAS PARA PACIENTES */
+Route::get('/dashboard/pacientes', function() {
+    /* Simulamos traer los datos */
+    $pacientes = [
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ],
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ],
+            [
+                'id' => 1,
+                'nombre' => 'Pedro',
+                'apellido' => 'Perez',
+                'especialidad' => 'Cardiologia',
+                'telefono' => '123456789'
+            ]
+        ];
+
+    return view('pacientes.index',compact('pacientes'));
+    
+})->name('pacientes');

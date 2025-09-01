@@ -1,0 +1,33 @@
+body{
+    background: #e9edf3;
+}
+.modulo{
+    max-width: 1200px;
+    width: 100%;
+}
+.top{
+    padding: 10px 1rem;
+    display: flex;
+    gap: 2rem;
+    background: var(--color-secondary);
+}
+.form-search{
+    flex: 1;
+    width: 100%;
+}
+.form-search > .control{
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+.perfil{
+    display: flex;
+    width: 35px;
+    height: 35px;
+}
+.perfil > img{
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.content{
+    padding: 2rem;
+}
