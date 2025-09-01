@@ -74,7 +74,7 @@
     </aside>
 
     <header>
-        <span>Usuario: Juan Pérez</span>
+        <span>Usuario: Administrador Torre B</span>
     </header>
 
     <main>

@@ -1,4 +1,4 @@
-@extends(layouts.app)
+@extends('layouts.app')
 @section('title', 'Prosalus | Dashboard')
 
 @section('content')
