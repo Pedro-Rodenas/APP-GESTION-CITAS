@@ -16,12 +16,22 @@ class CitaController extends Controller
         return CitaResource::collection(Cita::with(['paciente', 'medico'])->get());
     }
 
-    public function store(StoreCitaRequest $request)
+    public function store(Request $request)
     {
-        $cita = Cita::create($request->validated());
-        return new CitaResource($cita->load(['paciente', 'medico']));
-    }
+        $validated = $request->validate([
+            'fecha' => 'required|date',
+            'motivo' => 'required|string|max:255',
+            'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
+            'estado' => 'required|string|in:pendiente,confirmada,atendida,cancelada',
+            'observaciones' => 'nullable|string',
+            'sala' => 'nullable|string|max:100',
+        ]);
 
+        $medico = Cita::create($validated);
+
+        return redirect()->route('appointment.registrar')->with('success', 'Doctor registrado correctamente');
+    }
     public function show(Cita $cita)
     {
         return new CitaResource($cita->load(['paciente', 'medico']));
@@ -37,5 +47,14 @@ class CitaController extends Controller
     {
         $cita->delete();
         return response()->noContent();
+    }
+
+    public function create()
+    {
+        $pacientes = \App\Models\Paciente::all();
+        $medicos = \App\Models\Medico::all();
+        $estados = ['pendiente', 'confirmada', 'atendida', 'cancelada'];
+
+        return view('appointment.registrar', compact('pacientes', 'medicos', 'estados'));
     }
 }

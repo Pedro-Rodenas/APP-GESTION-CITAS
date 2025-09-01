@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CitaController;
+use App\Http\Controllers\Api\MedicoController;
 use App\Http\Controllers\Api\PacienteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;  // Importa Request para inyección
@@ -58,3 +60,16 @@ Route::get('/dashboard/pacientes', function () {
 
     return view('pacientes.index', compact('pacientes'));
 })->name('pacientes');
+Route::get('/doctors', function () {
+    return view('doctors.registrar');
+})->name('doctors.registrar');
+
+Route::get('/appointment', function () {
+    return view('appointment.registrar');
+})->name('appointment.registrar');
+
+Route::post('/patients', [PacienteController::class, 'store'])->name('patients.store');
+Route::post('/doctors', [MedicoController::class, 'store'])->name('doctor.store');
+Route::post('/appointment', [CitaController::class, 'store'])->name('appointment.store');
+Route::get('/appointment', [CitaController::class, 'create'])->name('appointment.registrar');
+Route::post('/appointment', [CitaController::class, 'store'])->name('appointment.store');
