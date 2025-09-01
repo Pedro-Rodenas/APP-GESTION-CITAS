@@ -15,14 +15,21 @@
         </section>
         <section class="login-auth">
             <h1 class="login-title"> SANAR +</h1>
-            <form class="login" action="">
+            @if(session('error'))
+                <div style="color:red; padding:5px 12px; background-color:white; text-align:center;" class="alert alert-danger">
+                    {{session('error')}}
+                </div>
+            @endif
+            <small></small>
+            <form class="login" action="{{route('verificar')}}" method="POST">
+                @csrf
                 <div class="group-control">
                     <label for="nombre">Nombre</label>
-                    <input class="control" type="text" id="nombre" value="" placeholder="Ingresar Nombre">
+                    <input class="control" type="text" name="nombre" id="nombre" value="" placeholder="Ingresar Nombre">
                 </div>
                 <div class="group-control">
                     <label for="">Contraseña</label>
-                    <input class="control" type="password">
+                    <input class="control" name="password" type="password">
                 </div>
                 <button class="btn btn-access bg-white" type="submit">Ingresar</button>
             </form>
