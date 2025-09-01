@@ -22,8 +22,8 @@
                 </div>
             </div>
             <section class="content">
-                <section class="content-bg">
-                    <h1 class="content-title">Lista de Pacientes</h1>
+                <section class="content-bg">    
+                    <h1>Lista de Pacientes</h1>
                     <a class="btn btn-green" href="">Crear Paciente</a>
                     <table class="table">
                         <thead class="table-head">
@@ -33,7 +33,7 @@
                                 <th>Apellidos</th>
                                 <th>especialidad</th>
                                 <th>Teléfono</th>
-                                <th >Acciones</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -48,20 +48,21 @@
                                     <a class="acciones-icon" href="" class="btn btn-primary">
                                         <img src="{{asset('images/lapiz.png')}}" alt="">
                                     </a>
-                                    <form action="" method="POST" style="display:inline;">
+                                    <form class="form-delete" action="" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <a class="acciones-icon" href="">
-                                            <img src="{{asset('images/borrar.png')}}" alt="">
-                                        </a>
+                                        <div class="acciones-icon">
+                                            <button type="submit" class="btn btn-danger"></button>
+                                            <img class="img-absolute" src="{{asset('images/borrar.png')}}" alt="">
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    </section>
                 </section>
-            </section>
         </section>
     </main>
 </body>
