@@ -26,6 +26,7 @@ Route::post('/login', function(Request $request) {
 /* RUTAS PARA PACIENTES */
 Route::get('/dashboard/pacientes', function() {
     /* Simulamos traer los datos */
+    
     $pacientes = [
             [
                 'id' => 1,
