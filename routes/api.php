@@ -7,7 +7,9 @@ use App\Http\Controllers\Api\DiagnosticoController;
 use App\Http\Controllers\Api\TratamientoController;
 use App\Http\Controllers\Api\MedicamentoController;
 
+/* Pacientes */
 Route::apiResource('pacientes', PacienteController::class);
+
 Route::apiResource('medicos', MedicoController::class);
 Route::apiResource('citas', CitaController::class);
 Route::apiResource('diagnosticos', DiagnosticoController::class);
