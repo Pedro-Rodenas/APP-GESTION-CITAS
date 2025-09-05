@@ -1,12 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-=======
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PageController;
@@ -68,6 +60,3 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 // - MedicamentoController
 // - TratamientoController
 // ----------------------
-
-
->>>>>>> caa7307 (feat: añadir la  estructura de carpetas, archivos base y login funcional)
