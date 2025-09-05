@@ -35,7 +35,6 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 */
 
 
-
 // ----------------------
 // Pacientes - Citas
 // Controladores:
@@ -44,14 +43,12 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 // ----------------------
 
 
-
 // ----------------------
 // Doctores - Diagnósticos
 // Controladores:
 // - MedicoController
 // - DiagnosticoController
 // ----------------------
-
 
 
 // ----------------------
