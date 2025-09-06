@@ -36,14 +36,16 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 */
 
 
+/* PACIENTES ROUTES */
+Route::get('/pacientes', [PacienteController::class, 'index'])->name('pacientes.index');
+Route::get('/pacientes/crear', [PacienteController::class, 'create'])->name('pacientes.create');
+Route::post('/pacientes', [PacienteController::class, 'store'])->name('pacientes.store');
+Route::get('/pacientes/{paciente}', [PacienteController::class, 'show'])->name('pacientes.show');
+Route::get('/pacientes/{paciente}/editar', [PacienteController::class, 'edit'])->name('pacientes.edit');
+Route::put('/pacientes/{paciente}', [PacienteController::class, 'update'])->name('pacientes.update');
+Route::delete('/pacientes/{paciente}', [PacienteController::class, 'destroy'])->name('pacientes.destroy');
 
-// ----------------------
-// Pacientes - Citas
-// Controladores:
-// - PacienteController
-// - CitaController
-// ----------------------
-
+/* CITAS ROUTES */
 
 
 // ----------------------
@@ -63,12 +65,9 @@ Route::get('/medicos/search', [MedicoController::class, 'search'])->name('medico
 
 
 
-
 // ----------------------
 // Medicinas - Tratamientos
 // Controladores:
 // - MedicamentoController
 // - TratamientoController
 // ----------------------
-
-
