@@ -32,4 +32,15 @@ class Medico extends Model
     {
         return $this->hasMany(Tratamiento::class, 'medico_id');
     }
+
+    public function scopeSearch($query, $term)
+    {
+        $columns = ['nombre', 'apellido', 'email', 'especialidad'];
+        $query->where(function ($q) use ($columns, $term) {
+            foreach ($columns as $column) {
+                $q->orWhere($column, 'like', "%{$term}%");
+            }
+        });
+        return $query;
+    }
 }

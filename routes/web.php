@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CitaController;
 use App\Http\Controllers\Api\MedicoControllerController;
 use App\Http\Controllers\Api\DiagnosticoController;
 use App\Http\Controllers\Api\MedicamentoController;
+use App\Http\Controllers\Api\MedicoController;
 use App\Http\Controllers\Api\TratamientoController;
 
 // Rutas de autenticación
@@ -51,6 +52,15 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 // - MedicoController
 // - DiagnosticoController
 // ----------------------
+
+Route::get('/medicos', [MedicoController::class, 'index'])->name('medicos.index');
+Route::get('/medicos/create', [MedicoController::class, 'create'])->name('medicos.create');
+Route::post('/medicos', [MedicoController::class, 'store'])->name('medicos.store');
+Route::get('/medicos/{medico}/edit', [MedicoController::class, 'edit'])->name('medicos.edit');
+Route::put('/medicos/{medico}', [MedicoController::class, 'update'])->name('medicos.update');
+Route::delete('/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy');
+Route::get('/medicos/search', [MedicoController::class, 'search'])->name('medicos.search');
+
 
 
 
