@@ -46,6 +46,13 @@ Route::put('/pacientes/{paciente}', [PacienteController::class, 'update'])->name
 Route::delete('/pacientes/{paciente}', [PacienteController::class, 'destroy'])->name('pacientes.destroy');
 
 /* CITAS ROUTES */
+Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
+Route::get('/citas/crear', [CitaController::class, 'create'])->name('citas.create');
+Route::post('/citas', [CitaController::class, 'store'])->name('citas.store');
+Route::get('/citas/{cita}', [CitaController::class, 'show'])->name('citas.show');
+Route::get('/citas/{cita}/editar', [CitaController::class, 'edit'])->name('citas.edit');
+Route::put('/citas/{cita}', [CitaController::class, 'update'])->name('citas.update');
+Route::delete('/citas/{cita}', [CitaController::class, 'destroy'])->name('citas.destroy');
 
 
 // ----------------------
