@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CitaController;
 use App\Http\Controllers\Api\MedicoControllerController;
 use App\Http\Controllers\Api\DiagnosticoController;
 use App\Http\Controllers\Api\MedicamentoController;
+use App\Http\Controllers\Api\MedicoController;
 use App\Http\Controllers\Api\TratamientoController;
 
 // Rutas de autenticación
@@ -45,6 +46,13 @@ Route::put('/pacientes/{paciente}', [PacienteController::class, 'update'])->name
 Route::delete('/pacientes/{paciente}', [PacienteController::class, 'destroy'])->name('pacientes.destroy');
 
 /* CITAS ROUTES */
+Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
+Route::get('/citas/crear', [CitaController::class, 'create'])->name('citas.create');
+Route::post('/citas', [CitaController::class, 'store'])->name('citas.store');
+Route::get('/citas/{cita}', [CitaController::class, 'show'])->name('citas.show');
+Route::get('/citas/{cita}/editar', [CitaController::class, 'edit'])->name('citas.edit');
+Route::put('/citas/{cita}', [CitaController::class, 'update'])->name('citas.update');
+Route::delete('/citas/{cita}', [CitaController::class, 'destroy'])->name('citas.destroy');
 
 
 // ----------------------
@@ -54,6 +62,21 @@ Route::delete('/pacientes/{paciente}', [PacienteController::class, 'destroy'])->
 // - DiagnosticoController
 // ----------------------
 
+Route::get('/medicos', [MedicoController::class, 'index'])->name('medicos.index');
+Route::get('/medicos/create', [MedicoController::class, 'create'])->name('medicos.create');
+Route::post('/medicos', [MedicoController::class, 'store'])->name('medicos.store');
+Route::get('/medicos/{medico}/edit', [MedicoController::class, 'edit'])->name('medicos.edit');
+Route::put('/medicos/{medico}', [MedicoController::class, 'update'])->name('medicos.update');
+Route::delete('/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy');
+Route::get('/medicos/search', [MedicoController::class, 'search'])->name('medicos.search');
+
+Route::get('/diagnosticos', [DiagnosticoController::class, 'index'])->name('diagnosticos.index');
+Route::get('/diagnosticos/create', [DiagnosticoController::class, 'create'])->name('diagnosticos.create');
+Route::post('/diagnosticos', [DiagnosticoController::class, 'store'])->name('diagnosticos.store');
+Route::get('/diagnosticos/{diagnostico}/edit', [DiagnosticoController::class, 'edit'])->name('diagnosticos.edit');
+Route::put('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'update'])->name('diagnosticos.update');
+Route::delete('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'destroy'])->name('diagnosticos.destroy');
+Route::get('/diagnosticos/search', [DiagnosticoController::class, 'search'])->name('diagnosticos.search');
 
 // ----------------------
 // Medicinas - Tratamientos

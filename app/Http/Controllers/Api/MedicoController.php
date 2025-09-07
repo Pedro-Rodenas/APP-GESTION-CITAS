@@ -8,34 +8,83 @@ use App\Http\Requests\UpdateMedicoRequest;
 use App\Http\Resources\MedicoResource;
 use App\Models\Medico;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\String_;
 
 class MedicoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return MedicoResource::collection(Medico::all());
+        $medicos = Medico::all();
+        if (request()->wantsJson()) {
+            return MedicoResource::collection($medicos);
+        }
+        return view('sistema.medicos.medicos_listar', compact('medicos'));
     }
+
 
     public function store(StoreMedicoRequest $request)
     {
         $medico = Medico::create($request->validated());
-        return new MedicoResource($medico);
+        if ($request->wantsJson()) {
+            return response()->json([
+                "message" => "Médico creado con Json",
+                "medico" => new MedicoResource($medico)
+            ]);
+        }
+        return redirect()
+            ->route('medicos.index')
+            ->with('success', 'Médico creado correctament');
+    }
+    
+    public function create()
+    {
+
+        return view('sistema.medicos.medicos_crear');
     }
 
-    public function show(Medico $medico)
+    public function search(Request $request)
     {
-        return new MedicoResource($medico);
+        $term = $request->input('q');
+        $medicos = Medico::search($term)->get();
+
+        if ($request->wantsJson()) {
+            return MedicoResource::collection($medicos);
+        }
+
+        return view('sistema.medicos.medicos_listar', compact('medicos', 'term'));
     }
+
 
     public function update(UpdateMedicoRequest $request, Medico $medico)
     {
         $medico->update($request->validated());
-        return new MedicoResource($medico);
+        if ($request->wantsJson()) {
+            return response()->json([
+                "message" => "Médico Actualizado desde Json",
+                "medico_update" => new MedicoResource($medico)
+            ]);
+        }
+        return redirect()
+            ->route('medicos.index')
+            ->with("success", "Médico actualizado correctamente");
     }
 
-    public function destroy(Medico $medico)
+    public function edit(Medico $medico)
+    {
+        return view('sistema.medicos.medicos_editar', compact('medico'));
+    }
+
+
+    public function destroy(Request $request, Medico $medico)
     {
         $medico->delete();
-        return response()->noContent();
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'Médico eliminado correctamente'
+            ], 200);
+        }
+        return redirect()
+            ->route('medicos.index')
+            ->with('success', 'Médico eliminado correctamente');
     }
 }
