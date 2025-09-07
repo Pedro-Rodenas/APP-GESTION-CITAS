@@ -78,9 +78,12 @@ Route::put('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'update
 Route::delete('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'destroy'])->name('diagnosticos.destroy');
 Route::get('/diagnosticos/search', [DiagnosticoController::class, 'search'])->name('diagnosticos.search');
 
-// ----------------------
-// Medicinas - Tratamientos
-// Controladores:
-// - MedicamentoController
-// - TratamientoController
-// ----------------------
+/* TRATAMIENTOS ROUTES */
+Route::get('/tratamientos', [TratamientoController::class, 'index'])->name('tratamientos.index');
+Route::get('/tratamientos/crear', [TratamientoController::class, 'create'])->name('tratamientos.create');
+Route::post('/tratamientos', [TratamientoController::class, 'store'])->name('tratamientos.store');
+Route::get('/tratamientos/{tratamiento}', [TratamientoController::class, 'show'])->name('tratamientos.show');
+Route::get('/tratamientos/{tratamiento}/editar', [TratamientoController::class, 'edit'])->name('tratamientos.edit');
+Route::put('/tratamientos/{tratamiento}', [TratamientoController::class, 'update'])->name('tratamientos.update');
+Route::delete('/tratamientos/{tratamiento}', [TratamientoController::class, 'destroy'])->name('tratamientos.destroy');
+

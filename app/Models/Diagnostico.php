@@ -44,12 +44,12 @@ class Diagnostico extends Model
         // Buscar en relaciones
         $query->orWhereHas('paciente', function ($q) use ($term) {
             $q->where('nombre', 'like', "%{$term}%")
-              ->orWhere('apellido', 'like', "%{$term}%");
+                ->orWhere('apellido', 'like', "%{$term}%");
         });
 
         $query->orWhereHas('medico', function ($q) use ($term) {
             $q->where('nombre', 'like', "%{$term}%")
-              ->orWhere('apellido', 'like', "%{$term}%");
+                ->orWhere('apellido', 'like', "%{$term}%");
         });
 
         return $query;
