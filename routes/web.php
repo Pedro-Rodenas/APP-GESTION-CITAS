@@ -87,3 +87,11 @@ Route::get('/tratamientos/{tratamiento}/editar', [TratamientoController::class, 
 Route::put('/tratamientos/{tratamiento}', [TratamientoController::class, 'update'])->name('tratamientos.update');
 Route::delete('/tratamientos/{tratamiento}', [TratamientoController::class, 'destroy'])->name('tratamientos.destroy');
 
+/* MEDICAMENTOS ROUTES */
+Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
+Route::get('/medicamentos/crear', [MedicamentoController::class, 'create'])->name('medicamentos.create');
+Route::post('/medicamentos', [MedicamentoController::class, 'store'])->name('medicamentos.store');
+Route::get('/medicamentos/{medicamento}', [MedicamentoController::class, 'show'])->name('medicamentos.show');
+Route::get('/medicamentos/{medicamento}/editar', [MedicamentoController::class, 'edit'])->name('medicamentos.edit');
+Route::put('/medicamentos/{medicamento}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
+Route::delete('/medicamentos/{medicamento}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
