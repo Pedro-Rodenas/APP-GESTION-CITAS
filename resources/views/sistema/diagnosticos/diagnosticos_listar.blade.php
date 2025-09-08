@@ -1,23 +1,28 @@
 @extends('layouts.app')
 @section('title', 'Diagnósticos')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/diagnosticos.css') }}">
+@endsection
+
 @section('content')
 <section>
     <h2>Tabla de Diagnósticos</h2>
-    <a class="btn" href="{{ route('diagnosticos.create') }}">Crear Diagnóstico</a>
+
+    <a class="btn btn-primary" href="{{ route('diagnosticos.create') }}">Crear Diagnóstico</a>
 
     @if(session('success'))
-    <div style="color: green">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     {{-- Formulario de búsqueda --}}
-    <form action="{{ route('diagnosticos.search') }}" method="GET" style="margin-bottom: 20px;">
+    <form action="{{ route('diagnosticos.search') }}" method="GET" class="form-busqueda">
         <input type="text" name="q" value="{{ $term ?? '' }}" placeholder="Buscar diagnóstico..." required>
-        <button type="submit">Buscar</button>
-        <a href="{{ route('diagnosticos.index') }}">Limpiar</a>
+        <button type="submit" class="btn btn-primary btn-buscar-search">Buscar</button>
+        <a href="{{ route('diagnosticos.index') }}" class="btn btn-secondary btn-limpiar">Limpiar</a>
     </form>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -32,14 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            @if($diagnosticos->isEmpty())
-            <tr>
-                <td colspan="9" style="text-align: center; color: red;">
-                    No hay diagnósticos registrados
-                </td>
-            </tr>
-            @else
-            @foreach($diagnosticos as $diagnostico)
+            @forelse($diagnosticos as $diagnostico)
             <tr>
                 <td>{{ $diagnostico->id }}</td>
                 <td>{{ $diagnostico->paciente->nombre ?? 'Sin paciente' }}</td>
@@ -49,21 +47,22 @@
                 <td>{{ $diagnostico->tipo_diagnostico }}</td>
                 <td>{{ $diagnostico->fecha }}</td>
                 <td>{{ $diagnostico->recomendaciones }}</td>
-                <td>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="{{ route('diagnosticos.edit', $diagnostico->id) }}">Editar</a>
+                <td class="acciones">
+                    <a href="{{ route('diagnosticos.edit', $diagnostico->id) }}" class="btn-editar">Editar</a>
 
-                        <form action="{{ route('diagnosticos.destroy', $diagnostico->id) }}" method="POST"
-                            onsubmit="return confirm('¿Seguro que deseas eliminar este diagnóstico?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="color: red">Eliminar</button>
-                        </form>
-                    </div>
+                    <form action="{{ route('diagnosticos.destroy', $diagnostico->id) }}" method="POST"
+                          onsubmit="return confirm('¿Seguro que deseas eliminar este diagnóstico?');" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-eliminar">Eliminar</button>
+                    </form>
                 </td>
             </tr>
-            @endforeach
-            @endif
+            @empty
+            <tr>
+                <td colspan="9" style="text-align: center; color: red;">No hay diagnósticos registrados</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </section>

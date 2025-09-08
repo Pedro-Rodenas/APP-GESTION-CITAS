@@ -5,7 +5,6 @@ use App\Http\Controllers\PageController;
 
 use App\Http\Controllers\Api\PacienteController;
 use App\Http\Controllers\Api\CitaController;
-use App\Http\Controllers\Api\MedicoControllerController;
 use App\Http\Controllers\Api\DiagnosticoController;
 use App\Http\Controllers\Api\MedicamentoController;
 use App\Http\Controllers\Api\MedicoController;
@@ -55,13 +54,7 @@ Route::put('/citas/{cita}', [CitaController::class, 'update'])->name('citas.upda
 Route::delete('/citas/{cita}', [CitaController::class, 'destroy'])->name('citas.destroy');
 
 
-// ----------------------
-// Doctores - Diagnósticos
-// Controladores:
-// - MedicoController
-// - DiagnosticoController
-// ----------------------
-
+/* MEDICOS ROUTES */
 Route::get('/medicos', [MedicoController::class, 'index'])->name('medicos.index');
 Route::get('/medicos/create', [MedicoController::class, 'create'])->name('medicos.create');
 Route::post('/medicos', [MedicoController::class, 'store'])->name('medicos.store');
@@ -70,6 +63,7 @@ Route::put('/medicos/{medico}', [MedicoController::class, 'update'])->name('medi
 Route::delete('/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy');
 Route::get('/medicos/search', [MedicoController::class, 'search'])->name('medicos.search');
 
+/* DIAGNOSTICOS ROUTES */
 Route::get('/diagnosticos', [DiagnosticoController::class, 'index'])->name('diagnosticos.index');
 Route::get('/diagnosticos/create', [DiagnosticoController::class, 'create'])->name('diagnosticos.create');
 Route::post('/diagnosticos', [DiagnosticoController::class, 'store'])->name('diagnosticos.store');
@@ -77,6 +71,7 @@ Route::get('/diagnosticos/{diagnostico}/edit', [DiagnosticoController::class, 'e
 Route::put('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'update'])->name('diagnosticos.update');
 Route::delete('/diagnosticos/{diagnostico}', [DiagnosticoController::class, 'destroy'])->name('diagnosticos.destroy');
 Route::get('/diagnosticos/search', [DiagnosticoController::class, 'search'])->name('diagnosticos.search');
+
 
 /* TRATAMIENTOS ROUTES */
 Route::get('/tratamientos', [TratamientoController::class, 'index'])->name('tratamientos.index');

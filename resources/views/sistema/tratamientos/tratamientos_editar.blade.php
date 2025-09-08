@@ -1,65 +1,90 @@
 @extends('layouts.app')
 @section('title', 'Editar Tratamiento')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/tratamientos.css') }}">
+@endsection
+
 @section('content')
+<div>
     <h2>Editar Tratamiento</h2>
 
-    <form action="{{ route('tratamientos.update', $tratamiento->id) }}" method="POST">
+    {{-- Mensajes de error --}}
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="{{ route('tratamientos.update', $tratamiento->id) }}" method="POST" class="formulario-paciente">
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" name="nombre" class="form-control" value="{{ $tratamiento->nombre }}" required>
+        <div class="group-control">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $tratamiento->nombre) }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea name="descripcion" class="form-control" required>{{ $tratamiento->descripcion }}</textarea>
+        <div class="group-control">
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" required>{{ old('descripcion', $tratamiento->descripcion) }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="duracion" class="form-label">Duración</label>
-            <input type="text" name="duracion" class="form-control" value="{{ $tratamiento->duracion }}" required>
+        <div class="group-control">
+            <label for="duracion">Duración</label>
+            <input type="text" name="duracion" id="duracion" value="{{ old('duracion', $tratamiento->duracion) }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="diagnostico_id" class="form-label">Diagnóstico</label>
-            <select name="diagnostico_id" class="form-select" required>
+        <div class="group-control">
+            <label for="diagnostico_id">Diagnóstico</label>
+            <select name="diagnostico_id" id="diagnostico_id" required>
+                <option value="">Seleccione un diagnóstico</option>
                 @foreach($diagnosticos as $diagnostico)
-                    <option value="{{ $diagnostico->id }}" {{ $tratamiento->diagnostico_id == $diagnostico->id ? 'selected' : '' }}>
-                        {{ $diagnostico->descripcion }}
-                    </option>
+                <option value="{{ $diagnostico->id }}" 
+                    {{ old('diagnostico_id', $tratamiento->diagnostico_id) == $diagnostico->id ? 'selected' : '' }}>
+                    {{ $diagnostico->descripcion }}
+                </option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="medico_id" class="form-label">Médico</label>
-            <select name="medico_id" class="form-select" required>
+        <div class="group-control">
+            <label for="medico_id">Médico</label>
+            <select name="medico_id" id="medico_id" required>
+                <option value="">Seleccione un médico</option>
                 @foreach($medicos as $medico)
-                    <option value="{{ $medico->id }}" {{ $tratamiento->medico_id == $medico->id ? 'selected' : '' }}>
-                        {{ $medico->nombre }}
-                    </option>
+                <option value="{{ $medico->id }}" 
+                    {{ old('medico_id', $tratamiento->medico_id) == $medico->id ? 'selected' : '' }}>
+                    {{ $medico->nombre }}
+                </option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="estado" class="form-label">Estado</label>
-            <select name="estado" class="form-select" required>
-                <option value="activo" {{ $tratamiento->estado == 'activo' ? 'selected' : '' }}>Activo</option>
-                <option value="inactivo" {{ $tratamiento->estado == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
-                <option value="finalizado" {{ $tratamiento->estado == 'finalizado' ? 'selected' : '' }}>Finalizado</option>
+        <div class="group-control">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="activo" {{ old('estado', $tratamiento->estado) == 'activo' ? 'selected' : '' }}>Activo</option>
+                <option value="inactivo" {{ old('estado', $tratamiento->estado) == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
+                <option value="finalizado" {{ old('estado', $tratamiento->estado) == 'finalizado' ? 'selected' : '' }}>Finalizado</option>
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="frecuencia_administracion" class="form-label">Frecuencia de Administración</label>
-            <input type="text" name="frecuencia_administracion" class="form-control"
-                value="{{ $tratamiento->frecuencia_administracion }}" required>
+        <div class="group-control">
+            <label for="frecuencia_administracion">Frecuencia de Administración</label>
+            <input type="text" name="frecuencia_administracion" id="frecuencia_administracion" 
+                value="{{ old('frecuencia_administracion', $tratamiento->frecuencia_administracion) }}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
+
+    <a href="{{ route('tratamientos.index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Volver a la lista de tratamientos
+    </a>
+</div>
 @endsection

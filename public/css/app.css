@@ -1,61 +1,117 @@
-.header {
-    position: relative;
-    top: 2rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
 }
 
+/* --- HEADER --- */
+.header {
+    width: 95%;
+    max-width: 1200px;
+    margin: 2rem auto 0 auto;
+    /* separación superior de 2rem */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 1rem 2rem;
+    position: relative;
+    z-index: 1000;
+}
+
+/* --- NAV --- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- LISTA PRINCIPAL --- */
 .nav__list {
+    width: auto;
     list-style: none;
     display: flex;
-    gap: 2rem;
-    position: relative;
+    gap: 4.5rem;
+    margin: 0 auto;
+    padding: 0;
 }
 
+/* --- ITEM --- */
 .nav__item {
     position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }
 
+/* --- LINK --- */
 .nav__link {
     text-decoration: none;
+    color: #2c529e;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.nav__item--has-submenu .nav__submenu {
-    display: none;
+.nav__link:hover {
+    background-color: rgba(26, 115, 232, 0.1);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+}
+
+/* --- SUBMENU --- */
+.nav__item--has-submenu:hover .nav__submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav__submenu {
     position: absolute;
     top: 100%;
     left: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     list-style: none;
-    flex-direction: column;
-    gap: 0.5rem;
     padding: 0.5rem 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.nav__item--has-submenu:hover .nav__submenu {
-    display: flex;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
 }
 
 .nav__submenu-item {
-    cursor: pointer;
+    width: 100%;
 }
 
 .nav__submenu-link {
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #2c529e;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
-.main {
-    padding: 2rem;
+.nav__submenu-link:hover {
+    background-color: rgba(26, 115, 232, 0.1);
+}
+
+/* --- ICONOS --- */
+.nav__link i,
+.nav__submenu-link i {
+    font-size: 1rem;
+}
+
+
+.main{
+    padding-top: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }

@@ -1,48 +1,81 @@
 @extends('layouts.app')
 @section('title', 'Crear Cita')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/citas.css') }}">
+@endsection
+
 @section('content')
+<div>
     <h2>Registrar nueva cita</h2>
 
-    <form action="{{ route('citas.store') }}" method="POST">
+    {{-- Mensajes de error --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('citas.store') }}" method="POST" class="formulario-paciente">
         @csrf
 
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" value="{{ old('fecha') }}" required><br>
+        <div class="group-control">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fecha" value="{{ old('fecha') }}" required>
+        </div>
 
-        <label for="motivo">Motivo:</label>
-        <input type="text" name="motivo" value="{{ old('motivo') }}" required><br>
+        <div class="group-control">
+            <label for="motivo">Motivo</label>
+            <input type="text" name="motivo" id="motivo" value="{{ old('motivo') }}" required>
+        </div>
 
-        <label for="paciente_id">Paciente:</label>
-        <select name="paciente_id" required>
-            <option value="">Seleccione un paciente</option>
-            @foreach($pacientes as $paciente)
-                <option value="{{ $paciente->id }}">{{ $paciente->nombre }} {{ $paciente->apellido }}</option>
-            @endforeach
-        </select><br>
+        <div class="group-control">
+            <label for="paciente_id">Paciente</label>
+            <select name="paciente_id" id="paciente_id" required>
+                <option value="">Seleccione un paciente</option>
+                @foreach($pacientes as $paciente)
+                    <option value="{{ $paciente->id }}">{{ $paciente->nombre }} {{ $paciente->apellido }}</option>
+                @endforeach
+            </select>
+        </div>
 
-        <label for="medico_id">Médico:</label>
-        <select name="medico_id" required>
-            <option value="">Seleccione un médico</option>
-            @foreach($medicos as $medico)
-                <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
-            @endforeach
-        </select><br>
+        <div class="group-control">
+            <label for="medico_id">Médico</label>
+            <select name="medico_id" id="medico_id" required>
+                <option value="">Seleccione un médico</option>
+                @foreach($medicos as $medico)
+                    <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
+                @endforeach
+            </select>
+        </div>
 
-        <label for="estado">Estado:</label>
-        <select name="estado" required>
-            <option value="pendiente">Pendiente</option>
-            <option value="confirmada">Confirmada</option>
-            <option value="atendida">Atendida</option>
-            <option value="cancelada">Cancelada</option>
-        </select><br>
+        <div class="group-control">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="pendiente">Pendiente</option>
+                <option value="confirmada">Confirmada</option>
+                <option value="atendida">Atendida</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
 
-        <label for="observaciones">Observaciones:</label>
-        <textarea name="observaciones">{{ old('observaciones') }}</textarea><br>
+        <div class="group-control">
+            <label for="observaciones">Observaciones</label>
+            <textarea name="observaciones" id="observaciones">{{ old('observaciones') }}</textarea>
+        </div>
 
-        <label for="sala">Sala:</label>
-        <input type="text" name="sala" value="{{ old('sala') }}"><br>
+        <div class="group-control">
+            <label for="sala">Sala</label>
+            <input type="text" name="sala" id="sala" value="{{ old('sala') }}">
+        </div>
 
-        <button type="submit">Guardar</button>
+        {{-- Botones --}}
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+    <a href="{{ route('citas.index') }}" class="btn btn-secondary">Cancelar</a>
+</div>
 @endsection

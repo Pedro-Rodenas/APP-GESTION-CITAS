@@ -1,51 +1,85 @@
 @extends('layouts.app')
 @section('title', 'Editar Cita')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/citas.css') }}">
+@endsection
+
 @section('content')
+<div>
     <h2>Editar cita</h2>
 
-    <form action="{{ route('citas.update', $cita->id) }}" method="POST">
+    {{-- Mensajes de error --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('citas.update', $cita->id) }}" method="POST" class="formulario-paciente">
         @csrf
         @method('PUT')
 
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" value="{{ old('fecha', $cita->fecha) }}" required><br>
+        <div class="group-control">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fecha" value="{{ old('fecha', $cita->fecha) }}" required>
+        </div>
 
-        <label for="motivo">Motivo:</label>
-        <input type="text" name="motivo" value="{{ old('motivo', $cita->motivo) }}" required><br>
+        <div class="group-control">
+            <label for="motivo">Motivo</label>
+            <input type="text" name="motivo" id="motivo" value="{{ old('motivo', $cita->motivo) }}" required>
+        </div>
 
-        <label for="paciente_id">Paciente:</label>
-        <select name="paciente_id" required>
-            @foreach($pacientes as $paciente)
-                <option value="{{ $paciente->id }}" {{ $paciente->id == $cita->paciente_id ? 'selected' : '' }}>
-                    {{ $paciente->nombre }} {{ $paciente->apellido }}
-                </option>
-            @endforeach
-        </select><br>
+        <div class="group-control">
+            <label for="paciente_id">Paciente</label>
+            <select name="paciente_id" id="paciente_id" required>
+                @foreach($pacientes as $paciente)
+                    <option value="{{ $paciente->id }}" {{ $paciente->id == $cita->paciente_id ? 'selected' : '' }}>
+                        {{ $paciente->nombre }} {{ $paciente->apellido }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <label for="medico_id">Médico:</label>
-        <select name="medico_id" required>
-            @foreach($medicos as $medico)
-                <option value="{{ $medico->id }}" {{ $medico->id == $cita->medico_id ? 'selected' : '' }}>
-                    {{ $medico->nombre }} {{ $medico->apellido }}
-                </option>
-            @endforeach
-        </select><br>
+        <div class="group-control">
+            <label for="medico_id">Médico</label>
+            <select name="medico_id" id="medico_id" required>
+                @foreach($medicos as $medico)
+                    <option value="{{ $medico->id }}" {{ $medico->id == $cita->medico_id ? 'selected' : '' }}>
+                        {{ $medico->nombre }} {{ $medico->apellido }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <label for="estado">Estado:</label>
-        <select name="estado" required>
-            <option value="pendiente" {{ $cita->estado == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-            <option value="confirmada" {{ $cita->estado == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
-            <option value="atendida" {{ $cita->estado == 'atendida' ? 'selected' : '' }}>Atendida</option>
-            <option value="cancelada" {{ $cita->estado == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
-        </select><br>
+        <div class="group-control">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="pendiente" {{ $cita->estado == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="confirmada" {{ $cita->estado == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
+                <option value="atendida" {{ $cita->estado == 'atendida' ? 'selected' : '' }}>Atendida</option>
+                <option value="cancelada" {{ $cita->estado == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
+            </select>
+        </div>
 
-        <label for="observaciones">Observaciones:</label>
-        <textarea name="observaciones">{{ old('observaciones', $cita->observaciones) }}</textarea><br>
+        <div class="group-control">
+            <label for="observaciones">Observaciones</label>
+            <textarea name="observaciones" id="observaciones">{{ old('observaciones', $cita->observaciones) }}</textarea>
+        </div>
 
-        <label for="sala">Sala:</label>
-        <input type="text" name="sala" value="{{ old('sala', $cita->sala) }}"><br>
+        <div class="group-control">
+            <label for="sala">Sala</label>
+            <input type="text" name="sala" id="sala" value="{{ old('sala', $cita->sala) }}">
+        </div>
 
-        <button type="submit">Actualizar</button>
+        {{-- Botones --}}
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
+
+    <a href="{{ route('citas.index') }}" class="btn btn-secondary">Cancelar</a>
+</div>
 @endsection

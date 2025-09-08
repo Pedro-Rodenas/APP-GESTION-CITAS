@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.dashboard {
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.dashboard__title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    /* resalta el título */
+    color: #2c529e;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard__title span {
+    color: #1a73e8;
+    /* contraste para "Dashboard" */
+}
+
+.dashboard__description {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.dashboard__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas */
+    gap: 30px;
+    /* separación uniforme */
+}
+
+.dashboard__card {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 3.5rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+/* Borde animado pero fijo */
+.dashboard__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(26, 115, 232, 1) 0%,
+        rgba(26, 115, 232, 0.6) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+}
+
+.dashboard__card:hover::before {
+    opacity: 1;
+    /* el borde aparece suavemente */
+}
+
+/* Más intensidad al hacer hover */
+.dashboard__card:hover {
+    background-color: #f9fbff;
+    /* un blanco azulado sutil */
+    box-shadow: 0 8px 14px rgba(26, 115, 232, 0.25);
+}
+
+.dashboard__icon {
+    color: #2c529e;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard__subtitle {
+    color: #555;
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+
+.logout-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-button:hover {
+    background-color: #2c529e;
+    box-shadow: 0 6px 10px rgba(26,115,232,0.3);
+}

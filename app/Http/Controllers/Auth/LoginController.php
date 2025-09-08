@@ -19,7 +19,8 @@ class LoginController extends Controller
         $password = $request->input('password');
 
         if ($nombre === 'admin' && $password === '123') {
-            return redirect()->route('dashboard'); 
+            // return redirect()->route('dashboard'); 
+            return redirect()->route('dashboard')->with('success', '¡Has iniciado sesión correctamente!');
         }
 
         return redirect()->route('login')->with('error', 'Usuario o contraseña incorrectos');

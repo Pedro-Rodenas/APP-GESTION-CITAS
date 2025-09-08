@@ -1,61 +1,62 @@
 @extends('layouts.app')
 @section('title', 'Médicos')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/medicos.css') }}">
+@endsection
+
 @section('content')
-<section>
-    <h2>Tabla de médicosp</h2>
-    <a class="btn" href="{{route('medicos.create')}}">Crear Médico</a>
+<section class="medicos-section">
+    <h2>Tabla de Médicos</h2>
+
+    <a href="{{ route('medicos.create') }}" class="btn btn-primary">Crear Médico</a>
 
     @if(session('success'))
-        <div style="color: green">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     {{-- Formulario de búsqueda --}}
-    <form action="{{ route('medicos.search') }}" method="GET" style="margin-bottom: 20px;">
+    <form action="{{ route('medicos.search') }}" method="GET" class="form-busqueda">
         <input type="text" name="q" value="{{ $term ?? '' }}" placeholder="Buscar médico..." required>
-        <button type="submit">Buscar</button>
-        <a href="{{ route('medicos.index') }}">Limpiar</a>
+        <button type="submit" class="btn btn-primary btn-buscar-search">Buscar</button>
+        <a href="{{ route('medicos.index') }}" class="btn btn-secondary btn-limpiar">Limpiar</a>
     </form>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>especialidad</th>
+                <th>Especialidad</th>
                 <th>Teléfono</th>
-                <th>experiencia</th>
+                <th>Experiencia</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-             @foreach($medicos as $medico)
-                <tr>
-                    <td>{{$medico->id}}</td>
-                    <td>{{$medico->nombre}}</td>
-                    <td>{{$medico->especialidad}}</td>
-                    <td>{{$medico->telefono}}</td>
-                    <td>{{$medico->años_experiencia}}</td>
-                    <td>
-                        <div style="display: flex; gap: 10px">
-                        {{-- Botón Editar --}}
-                        <a href="{{ route('medicos.edit', $medico->id) }}">Editar</a>
+            @forelse($medicos as $medico)
+            <tr>
+                <td>{{ $medico->id }}</td>
+                <td>{{ $medico->nombre }}</td>
+                <td>{{ $medico->especialidad }}</td>
+                <td>{{ $medico->telefono }}</td>
+                <td>{{ $medico->años_experiencia }}</td>
+                <td class="acciones">
+                    <a href="{{ route('medicos.edit', $medico->id) }}" class="btn btn-editar">Editar</a>
 
-                        {{-- Botón Eliminar --}}
-                        <form action="{{ route('medicos.destroy', $medico->id) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar este médico?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="color: red">Eliminar</button>
-                        </form>
-                    </div>
-                    </td>
-                </tr>
-            @endforeach
-            
+                    <form action="{{ route('medicos.destroy', $medico->id) }}" method="POST" class="form-inline" onsubmit="return confirm('¿Seguro que deseas eliminar este médico?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-eliminar">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="6">No hay médicos registrados.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
-    
-    </thead>
 </section>
-<!-- Contenido específico de médicos -->
 @endsection

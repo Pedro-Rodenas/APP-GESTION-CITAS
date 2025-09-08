@@ -1,63 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
+@section('title', 'Crear Paciente')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Paciente</title>
-    <link rel="stylesheet" href="http://127.0.0.1:8000/css/app.css">
-</head>
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/pacientes.css') }}">
+@endsection
 
-<body>
-    <header>
-        <h1>Agregar nuevo paciente</h1>
-    </header>
+@section('content')
+<h2>Agregar nuevo paciente</h2>
 
-    <main>
-        <!-- Mostrar errores si hay -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<!-- Mostrar errores si hay -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-        <!-- Formulario -->
-        <form method="POST" action="{{ route('pacientes.store') }}">
-            @csrf
+<!-- Formulario -->
+<form method="POST" action="{{ route('pacientes.store') }}" class="formulario-paciente">
+    @csrf
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}" required>
+    <div class="group-control">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}" required>
+    </div>
 
-            <label for="apellido">Apellido:</label>
-            <input type="text" name="apellido" id="apellido" value="{{ old('apellido') }}" required>
+    <div class="group-control">
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" id="apellido" value="{{ old('apellido') }}" required>
+    </div>
 
-            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}"
-                required>
+    <div class="group-control">
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required>
+    </div>
 
-            <label for="genero">Género:</label>
-            <select name="genero" id="genero" required>
-                <option value="">Selecciona...</option>
-                <option value="Masculino" {{ old('genero') == 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                <option value="Femenino" {{ old('genero') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
-            </select>
+    <div class="group-control">
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero" required>
+            <option value="">Selecciona...</option>
+            <option value="Masculino" {{ old('genero') == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+            <option value="Femenino" {{ old('genero') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+        </select>
+    </div>
 
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}">
+    <div class="group-control">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}">
+    </div>
 
-            <label for="direccion">Dirección:</label>
-            <input type="text" name="direccion" id="direccion" value="{{ old('direccion') }}">
+    <div class="group-control">
+        <label for="direccion">Dirección:</label>
+        <input type="text" name="direccion" id="direccion" value="{{ old('direccion') }}">
+    </div>
 
-            <label for="tipo_sangre">Tipo de Sangre:</label>
-            <input type="text" name="tipo_sangre" id="tipo_sangre" value="{{ old('tipo_sangre') }}">
+    <div class="group-control">
+        <label for="tipo_sangre">Tipo de Sangre:</label>
+        <input type="text" name="tipo_sangre" id="tipo_sangre" value="{{ old('tipo_sangre') }}">
+    </div>
 
-            <button type="submit">Guardar Paciente</button>
-        </form>
-    </main>
-</body>
+    <button type="submit" class="btn btn-primary">Guardar Paciente</button>
+</form>
 
-</html>
+<a href="{{ route('pacientes.index') }}" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> Volver a la lista de pacientes
+</a>
+@endsection
